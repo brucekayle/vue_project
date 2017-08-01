@@ -16,5 +16,6 @@
 
 <style>
 	html {
+		background-color: #fff
 	}
 </style>
