@@ -16,6 +16,6 @@
 
 <style>
 	html {
-		background-color: #aaa
+		background-color: #123452
 	}
 </style>

@@ -18,5 +18,4 @@ config.plugins = [
 // 动态向入口配置中注入 webpack-hot-middleware/client
 var devClient = path.resolve(__dirname, '../build/dev-client.js');
 config.entry = [devClient].concat(config.entry);
-console.log(config.entry)
 module.exports = config;
