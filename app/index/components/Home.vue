@@ -1,0 +1,50 @@
+<template>
+	<div>
+	<pageheader></pageheader>
+		<div class="page-body"> 
+			<sidebar  v-on:refreshbizlines="updateBreadcrumbs"></sidebar>
+			<div class="content">
+		        <div class="content-header">
+		            <div class="leftside-content-header">
+		                <ul class="breadcrumbs">
+		                    <li><i class="fa fa-table" aria-hidden="true"></i><a href="#">{{breadcrumb_one}}</a></li>
+		                    <li><a>{{breadcrumb_two}}</a></li>
+		                </ul>
+		            </div>
+		        </div>
+				<router-view></router-view>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	import Vue from 'vue' 
+	import Pageheader from './Pageheader'
+	import Sidebar from './Sidebar'
+	Vue.component('pageheader', Pageheader)
+	Vue.component('sidebar', Sidebar)
+
+	export default {
+		data()	{
+			return {
+			}
+		},
+		mounted() {
+			//每次刷新回到主页面
+			this.$router.push('/home')
+		},
+		computed: {
+		    breadcrumb_one () {
+		    	return this.$store.state.breadcrumb_one
+		    },
+		    breadcrumb_two () {
+		    	return this.$store.state.breadcrumb_two
+		    }
+		},
+		methods: {
+			updateBreadcrumbs (a){
+			}
+		}
+	}
+</script>

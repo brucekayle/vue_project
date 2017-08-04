@@ -10,7 +10,7 @@ module.exports = {
 		chunkFilename: '[id].[chunkhash].js'
 	},
 	resolve: {
-		extensions: ['.js', '.vue'],
+		extensions: ['.js', '.vue', 'axios'],
 		alias: { 'vue': 'vue/dist/vue.js' }
 	},
 	module: {
@@ -25,7 +25,7 @@ module.exports = {
 		    	loader: 'style-loader!css-loader' 
 		    },
       		{ 
-      			test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, 
+      			test: /\.(gif|jpg|png|woff|svg|eot|ttf|net)\??.*$/, 
       			loader: 'url-loader?limit=50000&name=[path][name].[ext]'
       		}
 		]
