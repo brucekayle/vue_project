@@ -2,7 +2,8 @@
 	<div class="accounts sign-in">
 	    <div class="page-body animated slideInDown">
         <div class="logo">
-            <img alt="logo" src="images/logo-dark.png" />
+
+        	<h2 class="text-center">卓智达企业管理平台</h2>
         </div>
         <div class="box">
             <div class="panel mb-none">
@@ -10,27 +11,22 @@
                     <form>
                         <div class="form-group mt-md">
                             <span class="input-with-icon">
-                                    <input type="email" class="form-control" id="email" placeholder="Email">
-                                    <i class="fa fa-envelope"></i>
+                                <input type="text" class="form-control" id="account" placeholder="账号">
+                                <i class="fa fa-user-o"></i>
                             </span>
                         </div>
                         <div class="form-group">
-                                <span class="input-with-icon">
-                                        <input type="password" class="form-control" id="password" placeholder="Password">
-                                        <i class="fa fa-key"></i>
-                                    </span>
+                            <span class="input-with-icon">
+                                <input type="password" class="form-control" id="password" placeholder="密码">
+                                <i class="fa fa-key"></i>
+                            </span>
                         </div>
                         <div class="form-group">
-                            <div class="checkbox-custom checkbox-primary">
-                                <input type="checkbox" id="remember-me" value="option1" checked>
-                                <label for="remember-me">Remember me</label>
-                            </div>
+                            <input type="text" class="form-control vericode" id="vericode" placeholder="验证码">
+                            <img src="../utils/image/org_login.png" class="veripic" height="34px" width="100px">
                         </div>
-                        <div class="form-group">
-                            <router-link to="/home" class="btn btn-primary btn-block">Sign in</router-link>
-                        </div>
-                        <div class="form-group text-center">
-                            <a href="#" v-on:click="">Forgot password?</a>
+                        <div class="form-group" style="margin-top:50px">
+                            <router-link to="/home" class="btn btn-primary btn-block">登录</router-link>
                         </div>
                     </form>
                 </div>
@@ -45,3 +41,18 @@
 
 
 </script>
+
+<style>
+	body {
+		background-image: url(../utils/image/org_login.png); 
+	}
+
+	.vericode {
+		width: 60%;
+		display: inline;
+	}
+
+	.veripic {
+		float: right;
+	}
+</style>
