@@ -2,7 +2,8 @@ import Vue from 'vue'
 
 export default {
   /* 修改面包屑 */
-  updateBreadcrumbs: (state, { one, two }) => {
+  updateBreadcrumbs: (state, { icon, one, two }) => {
+    state.breadcrumb_ico = icon,
     state.breadcrumb_one = one,
     state.breadcrumb_two = two
   },

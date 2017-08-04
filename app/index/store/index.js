@@ -8,6 +8,7 @@ Vue.use(Vuex)
 export function createStore () {
   return new Vuex.Store({
     state: {
+      breadcrumb_ico: "fa fa-home",
       breadcrumb_one: "首页",
       breadcrumb_two: "",
       activeType: null,

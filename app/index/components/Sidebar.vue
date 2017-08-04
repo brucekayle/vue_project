@@ -11,15 +11,15 @@
                 <nav>
                     <ul class="nav" id="main-nav">
                         <li class="has-child-item open-item active-item">
-                            <a><i class="fa fa-cubes" aria-hidden="true"></i><span>用户管理</span></a>
+                            <a><i class="fa fa-user-circle" aria-hidden="true"></i><span>用户管理</span></a>
                             <ul class="nav child-nav level-1">
-                                <li v-on:click="updateBreadcurmbs(0,'用户管理','增加用户')" :class="{'active-item': isActive[0]}"><router-link to="/home/user/add">增加用户</router-link></li>
-                                <li v-on:click="updateBreadcurmbs(1,'用户管理','查询用户')" :class="{'active-item': isActive[1]}"><router-link to="/home/user/list">查询用户</router-link></li>
-                                <li v-on:click="updateBreadcurmbs(2,'用户管理','修改用户')" :class="{'active-item': isActive[2]}"><router-link to="/home/user/modify">修改用户</router-link></li>
+                                <li v-on:click="updateBreadcurmbs(0,'fa fa-user-circle','用户管理','增加用户')" :class="{'active-item': isActive[0]}"><router-link to="/home/user/add">增加用户</router-link></li>
+                                <li v-on:click="updateBreadcurmbs(1,'fa fa-user-circle','用户管理','查询用户')" :class="{'active-item': isActive[1]}"><router-link to="/home/user/list">查询用户</router-link></li>
+                                <li v-on:click="updateBreadcurmbs(2,'fa fa-user-circle','用户管理','修改用户')" :class="{'active-item': isActive[2]}"><router-link to="/home/user/modify">修改用户</router-link></li>
                             </ul>
                         </li>
                         <li class="has-child-item close-item">
-                            <a><i class="fa fa-table" aria-hidden="true"></i><span>群组管理</span></a>
+                            <a><i class="fa fa-group" aria-hidden="true"></i><span>群组管理</span></a>
                             <ul class="nav child-nav level-1">
                                 <li><a href="tables_basic.html">增加群组</a></li>
                                 <li><a href="tables_data-tables.html">群组列表</a></li>
@@ -51,14 +51,14 @@
         (function(o){"use strict";o(".nano").nanoScroller()}).apply(this,[jQuery]),$(function(){"use strict";$('[data-toggle="tooltip"]').tooltip({container:"body"}),$('[data-toggle="popover"]').popover({container:"body"})});
 		},
     methods: {  
-      updateBreadcurmbs (index, one, two) {
+      updateBreadcurmbs (index, icon, one, two) {
         var length = this.isActive.length;
         for(var i = 0;i<length;i++){
           this.$set(this.isActive, i, false);
         }
         //数组改变无法动态更新view，可用下面方法解决
         this.$set(this.isActive, index, true);
-        this.$store.commit('updateBreadcrumbs', {one: one, two: two})
+        this.$store.commit('updateBreadcrumbs', {icon: icon, one: one, two: two})
       }
 	}
 }

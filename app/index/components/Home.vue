@@ -7,7 +7,7 @@
 		        <div class="content-header">
 		            <div class="leftside-content-header">
 		                <ul class="breadcrumbs">
-		                    <li><i class="fa fa-table" aria-hidden="true"></i><a href="#">{{breadcrumb_one}}</a></li>
+		                    <li><i :class="breadcrumb_ico" aria-hidden="true"></i><router-link to="/home">{{breadcrumb_one}}</router-link></li>
 		                    <li><a>{{breadcrumb_two}}</a></li>
 		                </ul>
 		            </div>
@@ -35,6 +35,9 @@
 			this.$router.push('/home')
 		},
 		computed: {
+			breadcrumb_ico () {
+		    	return this.$store.state.breadcrumb_ico
+		    },
 		    breadcrumb_one () {
 		    	return this.$store.state.breadcrumb_one
 		    },
