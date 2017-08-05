@@ -1,8 +1,8 @@
 <template>
-	<div class="row animated fadeInUp" v-loading="loading" element-loading-text="正在增加用户...">
+	<div class="row animated fadeInUp">
         <div class="col-sm-12">
             <h4 class="section-subtitle"><b>增加用户</b></h4>
-            <div class="panel">
+            <div class="panel" v-loading="loading" element-loading-text="正在增加用户...">
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-md-12">
@@ -20,43 +20,42 @@
                                 <div class="form-group">
                                     <label for="account" class="col-sm-3 control-label">用户账号</label>
                                     <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="account" id="account" maxlength="15">
+                                    <input type="text" class="form-control" name="account" id="account" maxlength="15" v-model="formData.account">
                                     <span class="help-block"><i class="fa fa-info-circle mr-xs"></i>必须是英文字母或数字,且长度不能大于<span class="code">15</span></span>
                                     </div>
                                 </div>
                             	<div class="form-group">
                                     <label for="password" class="col-sm-3 control-label">用户密码</label>
                                     <div class="col-sm-6">
-                                    <input type="password" class="form-control" name="password" id="password">
+                                    <input type="password" class="form-control" name="password" id="password" v-model="formData.password">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="confirmPassword" class="col-sm-3 control-label">确认密码</label>
                                     <div class="col-sm-6">
-                                    <input type="password" class="form-control" name="confirmPassword" id="confirmPassword">
+                                    <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" v-model="formData.confirmPassword">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="name" class="col-sm-3 control-label">用户名字</label>
                                     <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="name" id="name" maxlength="15">
+                                    <input type="text" class="form-control" name="name" id="name" maxlength="15" v-model="formData.name">
                                     <span class="help-block"><i class="fa fa-info-circle mr-xs"></i>必须是数字、英文字母或中文，且长度不能大于<span class="code">15</span>.如果是中文，长度不能大于<span class="code">10</span></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="groups" class="col-sm-3 control-label">所属群组</label>
                                     <div class="col-sm-6">
-                                    <select name="groups" id="groups" class="form-control" multiple="multiple" style="width: 100%">
-                                        <option v-for="group in groupList" :value="group.id">{{group.name}}</option>
-                                    </select>
+                                    <select2 id="groups" :options="groupList" v-model="selected" multiple style="width: 100%">
+								    </select2>
                                     </div>
                                 </div>
 								<div class="form-group">
                                     <label for="defaultGroup" class="col-sm-3 control-label">默认群组</label>
                                     <div class="col-sm-6">
                                     <select name="defaultGroup" id="defaultGroup" class="form-control" style="width: 100%">
-                                        <option value="no">不在群组</option>
-                                        <option v-for="group in selectGroupList" :value="group.id">{{group.name}}</option>
+                                        <option value="no" >不在群组</option>
+                                        <option v-for="group in formData.selectGroupList" :value="group.id">{{group.name}}</option>
                                     </select>
                                     </div>
                                 </div>
@@ -82,6 +81,7 @@
 </template>
 
 <script>
+	import Vue from "vue"
 	import '../utils/bootstrap/bootstrap-maxlength'
 	import '../utils/select2/js/select2.min'
 	import '../utils/select2/css/select2.min.css'
@@ -89,16 +89,48 @@
 	import '../utils/jquery-validation/jquery.validate.min'
 	import '../utils/jquery-form/jquery.form.min'
 	import axios from 'axios'
+	import select2 from "./select2"
+
+	Vue.component('select2',select2)
 
     export default {
     	data() {
     		return {
     			billList: [],
-    			groupList: [],
-    			selectGroupList: [],
-    			loading: false
+    			groupList: [{id:1,text:'a'},{id:2,text:'b'},{id:3,text:'adads'},{id:4,text:'bfasfsa'}],
+    			loading: false,
+    			formData: {
+    				account: '',
+    				password: '',
+    				confirmPassword: '',
+    				name: '',
+    				selectGroupList: []
+    			},
+    			defaultData: {},
+    			selected: []
     		}
     	},
+	    created() {
+	        this.defaultData = JSON.parse(JSON.stringify(this.formData))
+	    },
+		watch: {
+			account: function (value) {
+				//这里检测帐号是否重复
+			},
+			selected: function (value) {
+				//同步默认群组的选项为所属群组的选择##bug:在选择所属群组后点击默认群组再选择所属群组排序在前的选项会导致默认群组选项显示重复
+				this.formData.selectGroupList = []
+				for(var n in value){
+					for(var m in this.groupList){
+						if(value[n]==this.groupList[m].id){
+		    				var group = {"id":value[n],"name":this.groupList[m].text}
+		    				this.formData.selectGroupList.push(group)
+		    				
+		    			}
+					}
+				}
+			}
+		},
 		mounted: function() {
 			var vm = this
 
@@ -109,26 +141,12 @@
 			    placement: 'top-right-inside'
 			});
 
-			$("#groups").select2({
-		        allowClear: true
-		    });
-
-		    $("#groups").on("change", function(e) {
-		    	var selectGroupList = []
-		    	var selectGroupIds = $(this).val()
-		    	for(var n in selectGroupIds){
-		    		for(var m in vm.groupList){
-		    			if(selectGroupIds[n]==vm.groupList[m].id){
-		    				var group = {"id":selectGroupIds[n],"name":vm.groupList[m].name}
-		    				selectGroupList.push(group)
-		    			}
-		    		}
-		    	}
-		    	vm.selectGroupList = selectGroupList
-		    })
-
 			$("#defaultGroup").select2();
 		    
+		    $("#defaultGroup").on('change', function(){
+		    })
+
+
 			vm.updateSelectData()
 
 	        $("form").validate({
@@ -177,15 +195,19 @@
 		        submitHandler:function(form){
 		        	vm.loading = true
 					$("form").ajaxSubmit({
-		                url: 'http://localhost/ptt/webserver?event=org_adduser',
+		                url: 'http://localhost/ptt/webserver?event=org_adduser',//返回值要有最新的账单信息
 		               	success: function (data) {
 		               		vm.loading = false
 		               		vm.$message('用户增加成功！')
-		               		vm.$router.push('/home/user/add/back')
+		               		//vm.$router.push('/home/user/add/back')
+		                	//重置表单
+		                	vm.formData = Object.assign(vm.formData, vm.defaultData);
 		                },
 		                error: function (XMLHttpRequest, textStatus, errorThrown) {
 		                	vm.loading = false
 		                	vm.$message('用户增加失败！')
+		                	Object.assign(vm.formData, vm.defaultData)
+		                	vm.selected = []
 		                }
 		            });
 		            return false

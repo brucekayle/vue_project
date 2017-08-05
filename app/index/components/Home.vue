@@ -32,7 +32,7 @@
 		},
 		mounted() {
 			//每次刷新回到主页面
-			this.$router.push('/home')
+			//this.$router.push('/home')
 		},
 		computed: {
 			breadcrumb_ico () {
