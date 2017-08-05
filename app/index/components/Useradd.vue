@@ -46,7 +46,7 @@
                                 <div class="form-group">
                                     <label for="groups" class="col-sm-3 control-label">所属群组</label>
                                     <div class="col-sm-6">
-                                    <select2 id="groups" :options="groupList" v-model="selected" multiple style="width: 100%">
+                                    <select2 id="groups" :options="groupList" v-model="formData.selected" multiple style="width: 100%">
 								    </select2>
                                     </div>
                                 </div>
@@ -104,19 +104,25 @@
     				password: '',
     				confirmPassword: '',
     				name: '',
-    				selectGroupList: []
+    				selectGroupList: [],
+    				selected: []
     			},
     			defaultData: {},
-    			selected: []
     		}
     	},
 	    created() {
 	        this.defaultData = JSON.parse(JSON.stringify(this.formData))
 	    },
+	    computed: {
+	    	//利用computed做中间层，以监听对象的具体属性
+			selected() {
+		　　　　return this.formData.selected
+		　　},
+			account() {
+				return this.formData.account
+			}
+		},
 		watch: {
-			account: function (value) {
-				//这里检测帐号是否重复
-			},
 			selected: function (value) {
 				//同步默认群组的选项为所属群组的选择##bug:在选择所属群组后点击默认群组再选择所属群组排序在前的选项会导致默认群组选项显示重复
 				this.formData.selectGroupList = []
@@ -129,6 +135,9 @@
 		    			}
 					}
 				}
+			},
+			account: function(value){
+				//检测帐号存在
 			}
 		},
 		mounted: function() {
@@ -201,13 +210,12 @@
 		               		vm.$message('用户增加成功！')
 		               		//vm.$router.push('/home/user/add/back')
 		                	//重置表单
-		                	vm.formData = Object.assign(vm.formData, vm.defaultData);
+		                	Object.assign(vm.formData, vm.defaultData);
 		                },
 		                error: function (XMLHttpRequest, textStatus, errorThrown) {
 		                	vm.loading = false
 		                	vm.$message('用户增加失败！')
 		                	Object.assign(vm.formData, vm.defaultData)
-		                	vm.selected = []
 		                }
 		            });
 		            return false
