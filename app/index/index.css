@@ -27,7 +27,7 @@ body {
 }
 
 body {
-  background: #aaa;
+  background: white;
   margin: 0;
   color: #404040;
   font-family: "Open Sans", Arial, sans-serif;
@@ -120,10 +120,10 @@ a:focus {
 
 /* Left-sidebar COLLAPSE*/
 /*================================================*/
-html.left-sidebar-collapsed .content {
+div.left-sidebar-collapsed .content {
   margin-left: 60px;
 }
-html.left-sidebar-collapsed .left-sidebar {
+div.left-sidebar-collapsed .left-sidebar {
   width: 60px;
 }
 
@@ -231,7 +231,7 @@ html.right-sidebar-opened .right-sidebar {
   }
 
   /* Fixed -  Left-sidebar collapse */
-  html.fixed.left-sidebar-collapsed .content .content-header {
+  div.left-sidebar-collapsed .content .content-header {
     left: 60px;
   }
 }
@@ -308,7 +308,7 @@ html.right-sidebar-opened .right-sidebar {
     transition-delay: 0;
   }
 
-  html.left-sidebar-open .left-sidebar {
+  div.left-sidebar-open .left-sidebar {
     margin-left: 0;
   }
 }
@@ -829,7 +829,7 @@ html.right-sidebar-opened .right-sidebar {
   }
 }
 @media only screen and (min-width: 768px) {
-  html.left-sidebar-collapsed .left-sidebar-title {
+  div.left-sidebar-collapsed .left-sidebar-title {
     opacity: 0;
   }
 }
@@ -925,44 +925,44 @@ ul#main-nav ul.child-nav.level-3 li a {
 }
 
 @media only screen and (min-width: 768px) {
-  html.left-sidebar-collapsed .left-sidebar #main-nav > li.open-item > a {
+  div.left-sidebar-collapsed .left-sidebar #main-nav > li.open-item > a {
     box-shadow: none;
   }
-  html.left-sidebar-collapsed .left-sidebar #main-nav > li > a {
+  div.left-sidebar-collapsed .left-sidebar #main-nav > li > a {
     overflow: hidden;
     text-overflow: clip;
   }
-  html.left-sidebar-collapsed .left-sidebar #main-nav > li > a span {
+  div.left-sidebar-collapsed .left-sidebar #main-nav > li > a span {
     visibility: hidden;
   }
-  html.left-sidebar-collapsed .left-sidebar #main-nav li.has-child-item a:after {
+  div.left-sidebar-collapsed .left-sidebar #main-nav li.has-child-item a:after {
     display: none;
   }
-  html.left-sidebar-collapsed .left-sidebar #main-nav li.has-child-item ul.child-nav {
+  div.left-sidebar-collapsed .left-sidebar #main-nav li.has-child-item ul.child-nav {
     display: none;
   }
-  html.left-sidebar-collapsed .left-sidebar .nano:hover {
+  div.left-sidebar-collapsed .left-sidebar .nano:hover {
     width: 220px;
     min-height: 100vh;
     background: rgba(32, 32, 32, 0.1);
   }
-  html.left-sidebar-collapsed .left-sidebar .nano:hover .nano-content {
+  div.left-sidebar-collapsed .left-sidebar .nano:hover .nano-content {
     background: rgba(32, 32, 32, 0.9);
   }
-  html.left-sidebar-collapsed .left-sidebar .nano:hover #main-nav > li.open-item > a {
+  div.left-sidebar-collapsed .left-sidebar .nano:hover #main-nav > li.open-item > a {
     box-shadow: 0px -1px 0 #004E90 inset;
   }
-  html.left-sidebar-collapsed .left-sidebar .nano:hover #main-nav > li > a {
+  div.left-sidebar-collapsed .left-sidebar .nano:hover #main-nav > li > a {
     overflow: visible;
     text-overflow: initial;
   }
-  html.left-sidebar-collapsed .left-sidebar .nano:hover #main-nav > li > a span {
+  div.left-sidebar-collapsed .left-sidebar .nano:hover #main-nav > li > a span {
     visibility: visible;
   }
-  html.left-sidebar-collapsed .left-sidebar .nano:hover #main-nav li.has-child-item a:after {
+  div.left-sidebar-collapsed .left-sidebar .nano:hover #main-nav li.has-child-item a:after {
     display: block;
   }
-  html.left-sidebar-collapsed .left-sidebar .nano:hover #main-nav li.has-child-item.open-item > ul.child-nav {
+  div.left-sidebar-collapsed .left-sidebar .nano:hover #main-nav li.has-child-item.open-item > ul.child-nav {
     display: block;
   }
 }
@@ -4549,18 +4549,18 @@ html.margin-padding .box-padding .box-in {
 }
 
 /* active state, i.e. menu open */
-html.left-sidebar-collapsed .c-hamburger--htla span {
+div.left-sidebar-collapsed .c-hamburger--htla span {
   transform: none;
 }
-html.left-sidebar-collapsed .c-hamburger--htla span::before,
-html.left-sidebar-collapsed .c-hamburger--htla span::after {
+div.left-sidebar-collapsed .c-hamburger--htla span::before,
+div.left-sidebar-collapsed .c-hamburger--htla span::after {
   width: 100%;
 }
-html.left-sidebar-collapsed .c-hamburger--htla span::before {
+div.left-sidebar-collapsed .c-hamburger--htla span::before {
   top: 7px;
   transform: none;
 }
-html.left-sidebar-collapsed .c-hamburger--htla span::after {
+div.left-sidebar-collapsed .c-hamburger--htla span::after {
   top: -7px;
   transform: none;
 }

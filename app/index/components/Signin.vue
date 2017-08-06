@@ -22,8 +22,8 @@
                             </span>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control vericode" id="vericode" placeholder="验证码">
-                            <img src="../utils/image/org_login.png" class="veripic" height="34px" width="100px">
+                            <input type="text" class="form-control vericode" id="vericode" placeholder="验证码" style="width: 60%;display: inline;">
+                            <img src="../image/org_login.png" class="veripic" height="34px" width="100px">
                         </div>
                         <div class="form-group" style="margin-top:50px">
                             <router-link to="/home" class="btn btn-primary btn-block">登录</router-link>
@@ -44,14 +44,8 @@
 
 <style>
 	body {
-		background-image: url(../utils/image/org_login.png); 
+		background-image: url('../image/org_login.png')!important;
 	}
-
-	.vericode {
-		width: 60%;
-		display: inline;
-	}
-
 	.veripic {
 		float: right;
 	}

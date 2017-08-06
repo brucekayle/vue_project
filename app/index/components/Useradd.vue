@@ -258,10 +258,5 @@
 </script>
 
 <style>
-	input {
-		background: transparent;
-	    border:none;
-	    outline: none;
-	}
 
 </style>

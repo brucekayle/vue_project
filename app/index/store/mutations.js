@@ -7,6 +7,14 @@ export default {
     state.breadcrumb_one = one,
     state.breadcrumb_two = two
   },
+
+  switchLeftSidebar: (state, { status }) => {
+    if(state.leftSidebarStatus == ''){
+      state.leftSidebarStatus = status
+    }else{
+      state.leftSidebarStatus = ''
+    }
+  },
     
 
   SET_ACTIVE_TYPE: (state, { type }) => {

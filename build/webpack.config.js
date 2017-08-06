@@ -24,10 +24,14 @@ module.exports = {
 		    	test: /\.css$/, 
 		    	loader: 'style-loader!css-loader' 
 		    },
-      		{ 
-      			test: /\.(gif|jpg|png|woff|svg|eot|ttf|net)\??.*$/, 
-      			loader: 'url-loader?limit=50000&name=[path][name].[ext]'
-      		}
+      		{
+	          test: /\.(png|jpg|gif)$/,
+	          loader: 'url-loader?limit=8192&name=img/[hash].[ext]',
+	        },
+      		{
+	          test: /\.(woff|woff2|svg|eot|ttf)\??.*$/,
+	          loader: 'file-loader?name=fonts/[name].[ext]',
+	        },
 		]
 	},
 	plugins: [

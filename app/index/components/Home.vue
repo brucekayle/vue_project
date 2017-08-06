@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div id="html" :class="leftSidebarStatus">
 	<pageheader></pageheader>
 		<div class="page-body"> 
 			<sidebar  v-on:refreshbizlines="updateBreadcrumbs"></sidebar>
@@ -35,6 +35,9 @@
 			//this.$router.push('/home')
 		},
 		computed: {
+			leftSidebarStatus　() {
+				return this.$store.state.leftSidebarStatus
+			},
 			breadcrumb_ico () {
 		    	return this.$store.state.breadcrumb_ico
 		    },

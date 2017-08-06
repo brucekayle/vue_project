@@ -6,7 +6,7 @@
                     <!--<img alt="logo" src="images/header-logo.png" />-->
                 </a>
             </div>
-            <div id="menu-toggle" class="visible-xs toggle-left-sidebar" data-toggle-class="left-sidebar-open" data-target="html">
+            <div id="menu-toggle" class="visible-xs toggle-left-sidebar" @click="leftSidebarOpen">
                 <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
             </div>
         </div>
@@ -46,6 +46,11 @@
         data() {
             return {
                 msg: 'Hello World!'
+            }
+        },
+        methods: {
+            leftSidebarOpen () {
+                this.$store.commit('switchLeftSidebar', {status: 'left-sidebar-open'})
             }
         }
     }
