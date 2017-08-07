@@ -184,12 +184,6 @@
             this.$set(this.isActive, index, true);
             this.$store.commit('updateBreadcrumbs', {icon: icon, one: one, two: two})
         },
-        btnStartSpinning(e){
-            $('button').hasClass("btn-loading")&&$('button').prop("disabled",!0).addClass("btn-spinning").append('<i class="fa fa-spinner fa-spin btn-spin" aria-hidden="true"></i>')
-        },
-        btnStopSpinning(e){
-            $('button').hasClass("btn-spinning")&&$('button').prop("disabled",!1).removeClass("btn-spinning").find("i.btn-spin").remove()
-        },
         leftSidebarCollapsed () {
             this.$store.commit('switchLeftSidebar', {status: 'left-sidebar-collapsed'})
         },
