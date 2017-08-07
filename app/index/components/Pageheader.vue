@@ -1,7 +1,8 @@
 <template>
     <div class="page-header">
         <div class="leftside-header">
-            <div class="logo">
+            <div class="" style="margin:15px">
+                <span style="font-size:20px">卓智达企业管理平台</span>
                 <a href="index.html" class="on-click">
                     <!--<img alt="logo" src="images/header-logo.png" />-->
                 </a>
@@ -17,7 +18,7 @@
                         <!--<img src="images/user-avatar.jpg" alt="Jane Doe" />-->
                     </div>
                     <div class="user-info">
-                        <span class="user-name">Jane Doe</span>
+                        <span class="user-name">Bruce Kayle</span>
                         <span class="user-profile">Admin</span>
                     </div>
                     <i class="fa fa-plus icon-open" aria-hidden="true"></i>

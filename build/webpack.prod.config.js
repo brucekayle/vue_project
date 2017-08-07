@@ -25,7 +25,12 @@ var config = merge(base, {
     },
     plugins: [
         // 提取css为单文件
-        new ExtractTextPlugin("[name].[contenthash].css")
+        new ExtractTextPlugin("[name].[contenthash].css"),
+        new webpack.optimize.UglifyJsPlugin({
+          compress: {
+            warnings: false
+          }
+        })
     ]
 })
 

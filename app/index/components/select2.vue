@@ -12,7 +12,7 @@
 		    var vm = this
 		    $(this.$el)
 		      // init select2
-		      .select2({ data: this.options,allowClear:true })
+		      .select2({ data: this.options,allowClear:true,placeholder: "请选择"})
 		      .val(this.value)
 		      .trigger('change')
 		      // emit event on change.

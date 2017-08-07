@@ -1,8 +1,8 @@
 <template>
-	<div class="row animated fadeInUp">
+	<div class="row animated fadeInRight">
         <div class="col-sm-12">
             <h4 class="section-subtitle"><b>增加用户</b></h4>
-            <div class="panel" v-loading="loading" element-loading-text="正在增加用户...">
+            <div class="panel" v-loading="loading" element-loading-text="增加中...">
                 <div class="panel-content">
                     <div class="row">
                         <div class="col-md-12">
@@ -10,11 +10,8 @@
                             	<div class="form-group">
                                     <label for="bill" class="col-sm-3 control-label">使用账单</label>
                                     <div class="col-sm-6">
-                                    <select name="bill" id="bill" class="form-control" style="width: 100%">
-                                        <option v-for="bill in billList" :value="bill.id">
-                                        	{{bill.end_time}}（使用情况：{{bill.used_num}}/{{bill.number}}）
-                                        </option>
-                                    </select>
+                                    <select2 name="bill" id="bill" class="form-control" :options="billList" style="width: 100%">
+								    </select2>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -60,6 +57,63 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="priority" class="col-sm-3 control-label">讲话级别</label>
+                                    <div class="col-sm-6">
+                                    <select2 name="priority" id="priority" class="form-control" :options="priorityList" v-model="formData.priority" style="width: 100%">
+								    </select2>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mobile" class="col-sm-3 control-label">手机号码</label>
+                                    <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="mobile" id="mobile" maxlength="11" v-model="formData.mobile">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="function" class="col-sm-3 control-label">用户功能</label>
+                                    <div class="col-sm-6">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="function" value="1" v-model="formData.function"> 好友
+                                        </label>
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="function" value="6144" v-model="formData.function"> 查位
+                                        </label>
+                                       	<label class="checkbox-inline">
+                                           	<input type="checkbox" name="function" value="16" v-model="formData.function"> 记录
+                                       	</label>
+                                       	<label class="checkbox-inline">
+                                           	<input type="checkbox" name="function" value="64" v-model="formData.function"> 监听
+                                       	</label>
+                                       	<label class="checkbox-inline">
+                                           	<input type="checkbox" name="function" value="512" v-model="formData.function"> 遥闭
+                                       	</label>
+                                       	<label class="checkbox-inline">
+                                           	<input type="checkbox" name="function" value="16384" v-model="formData.function"> 最后组
+                                       	</label>
+                                       	<label class="checkbox-inline">
+                                           	<input type="checkbox" name="function" value="2" v-model="formData.function"> 单呼
+                                       	</label>
+                                       	<label class="checkbox-inline">
+                                           	<input type="checkbox" name="function" value="4" v-model="formData.function"> 换组
+                                       	</label>
+                                       	<label class="checkbox-inline">
+                                           	<input type="checkbox" name="function" value="2048" v-model="formData.function"> 定位
+                                       	</label>
+                                       	<label class="checkbox-inline">
+                                           	<input type="checkbox" name="function" value="1024" v-model="formData.function"> 录音
+                                       	</label>
+                                       	<label class="checkbox-inline">
+                                           	<input type="checkbox" name="function" value="128" v-model="formData.function"> 显组
+                                       	</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sim" class="col-sm-3 control-label">IMEI</label>
+                                    <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="sim" id="sim" maxlength="11" v-model="formData.sim">
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="desc" class="col-sm-3 control-label">用户描述</label>
                                     <div class="col-sm-6">
                                     <textarea class="form-control" rows="3" name="desc" id="desc"></textarea>
@@ -82,14 +136,14 @@
 
 <script>
 	import Vue from "vue"
-	import '../utils/bootstrap/bootstrap-maxlength'
-	import '../utils/select2/js/select2.min'
-	import '../utils/select2/css/select2.min.css'
-	import '../utils/select2/css/select2-bootstrap.min.css'
-	import '../utils/jquery-validation/jquery.validate.min'
-	import '../utils/jquery-form/jquery.form.min'
+	import '../../utils/bootstrap/bootstrap-maxlength'
+	import '../../utils/select2/js/select2.min'
+	import '../../utils/select2/css/select2.min.css'
+	import '../../utils/select2/css/select2-bootstrap.min.css'
+	import '../../utils/jquery-validation/jquery.validate.min'
+	import '../../utils/jquery-form/jquery.form.min'
 	import axios from 'axios'
-	import select2 from "./select2"
+	import select2 from "../select2"
 
 	Vue.component('select2',select2)
 
@@ -105,9 +159,14 @@
     				confirmPassword: '',
     				name: '',
     				selectGroupList: [],
-    				selected: []
+    				selected: [],
+    				priority: 0,
+    				mobile: '',
+    				function: [],
+    				sim: ''
     			},
     			defaultData: {},
+    			priorityList: [{id:0,text:'低级'},{id:1,text:'中级'},{id:2,text:'高级'},{id:3,text:'特级'}]
     		}
     	},
 	    created() {
@@ -120,6 +179,9 @@
 		　　},
 			account() {
 				return this.formData.account
+			},
+			function() {
+				return this.formData.function
 			}
 		},
 		watch: {
@@ -138,12 +200,13 @@
 			},
 			account: function(value){
 				//检测帐号存在
+			},
+			function: function(value){
+
 			}
 		},
 		mounted: function() {
 			var vm = this
-
-			$('#bill').select2()
 
 			$('#account').maxlength({
 			    alwaysShow: true,
@@ -205,12 +268,16 @@
 		        	vm.loading = true
 					$("form").ajaxSubmit({
 		                url: 'http://localhost/ptt/webserver?event=org_adduser',//返回值要有最新的账单信息
+		                dataType: 'json',
 		               	success: function (data) {
 		               		vm.loading = false
 		               		vm.$message('用户增加成功！')
 		               		//vm.$router.push('/home/user/add/back')
 		                	//重置表单
 		                	Object.assign(vm.formData, vm.defaultData);
+		                	//解决select2视图不更新的问题，原因应该是value不改变text也不改变
+		                	$("#bill").html("")
+		                	vm.updateSelectData()
 		                },
 		                error: function (XMLHttpRequest, textStatus, errorThrown) {
 		                	vm.loading = false
@@ -228,9 +295,12 @@
 			updateSelectData() {
 				var vm = this
 
-				axios.get('http://localhost/ptt/webserver?event=org_adduser&method=getBillList')
+				axios.get(vm.$store.state.serverUrl+'webserver?event=org_adduser&method=getBillList')
 		          .then(function (response) {
 		          	if(response.data.status==0){
+		          		for(var n in response.data.data){
+		          			response.data.data[n].text = response.data.data[n].end_time+'（使用情况：'+response.data.data[n].used_num+'/'+response.data.data[n].number+'）'
+		          		}
 		          		vm.billList = response.data.data
 		          	}
 		          })
@@ -240,7 +310,7 @@
 			          message: '账单获取失败'
 			        });
 		          })
-		    	axios.get('http://localhost/ptt/webserver?event=org_adduser&method=getGroupList')
+		    	axios.get(vm.$store.state.serverUrl+'webserver?event=org_adduser&method=getGroupList')
 		          .then(function (response) {
 		          	if(response.data.status==0){
 		          		vm.groupList = response.data.data
@@ -249,14 +319,10 @@
 		          .catch(function (error) {
 		            vm.$notify.error({
 			          title: '错误',
-			          message: '账单群组失败'
+			          message: '获取群组失败'
 			        });
 		          })
 			}
 	 	}
 	}
 </script>
-
-<style>
-
-</style>

@@ -5,7 +5,7 @@
 
         	<h2 class="text-center">卓智达企业管理平台</h2>
         </div>
-        <div class="box">
+        <div class="box" v-loading="loading" element-loading-text="登录中...">
             <div class="panel mb-none">
                 <div class="panel-content bg-scale-0">
                     <form>
@@ -26,7 +26,7 @@
                             <img src="../image/org_login.png" class="veripic" height="34px" width="100px">
                         </div>
                         <div class="form-group" style="margin-top:50px">
-                            <router-link to="/home" class="btn btn-primary btn-block">登录</router-link>
+                            <a class="btn btn-primary btn-block" @click="signin">登录</a>
                         </div>
                     </form>
                 </div>
@@ -37,7 +37,25 @@
 </template>
 
 <script>
+	export default {
+		data() {
+			return {
+				loading: false
+			}
+		},
+		methods: {
+			signin: function(){
+				var vm = this
+				this.loading = true
 
+				setTimeout(function(){
+					vm.$router.push('/home')
+				},1000)
+
+
+			}
+		}
+	}
 
 
 </script>

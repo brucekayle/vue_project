@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Userlist from '../components/Userlist'
-import Useradd from '../components/Useradd'
+import Userlist from '../components/user/Userlist'
+import Useradd from '../components/user/Useradd'
+import Usermodify from '../components/user/Usermodify'
+import Usermodifyform from '../components/user/Usermodifyform'
 import Home from '../components/Home'
 import Signin from '../components/Signin'
-import Useraddback from '../components/Useraddback'
+import Blank from '../components/Blank'
 Vue.use(Router)
 
 
@@ -18,8 +20,12 @@ export function createRouter () {
       		children:[
       			{ path: 'user/list', component:Userlist },
       			{ path: 'user/add', component:Useradd },
-      			{ path: 'user/modify', component:Useradd },
-      			{ path: 'user/add/back', component:Useraddback }
+      			{ path: 'user/modify', component:Usermodify,
+      				children:[
+      					{ path: ':account', component:Usermodifyform }
+      				]
+      			},
+      			
       		]
         }
     ]
